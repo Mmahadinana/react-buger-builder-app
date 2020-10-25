@@ -10,13 +10,13 @@ import BurgerBuilder from '../containers/BurgerBuilder/BurgerBuilder';
 import Logout from '../containers/Auth/Logout/Logout'
 
 const asyncCheckout = asyncComponent(() => {
-  return import('../containers/Checkout/Checkout')
+  return import('../containers/Checkout/Checkout');
 });
 const asyncOrders = asyncComponent(() => {
-  return import('../containers/Orders/Orders')
+  return import('../containers/Orders/Orders');
 })
 const asyncAuth = asyncComponent(() => {
-  return import('../containers/Auth/Auth')
+  return import('../containers/Auth/Auth');
 })
 class App extends Component {
   componentDidMount(){
