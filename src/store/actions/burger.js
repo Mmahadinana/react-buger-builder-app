@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import axiosOrder from '../../axios_orders';
 
 //remove ingredient action creator
 export const removeIngredients = (name) => {
@@ -31,16 +30,8 @@ export const fetchIngredientsFailed = () => {
 }
 
 export const initIngredients = () => {
-    return dispatch => {
-
-         axiosOrder.get('/ingredients.json').then(
-            res => (
-                dispatch(setIngredients(res.data))
-            )
-        ).catch(error =>{
-            
-            dispatch(fetchIngredientsFailed())
-        })
+    return{
+        type: actionTypes.INITIAL_INGREDIENTS
     }
 
 }
