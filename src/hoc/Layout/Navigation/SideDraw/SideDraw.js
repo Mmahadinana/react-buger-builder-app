@@ -8,7 +8,7 @@ import Backdrop from '../../../../components/UI/Backdrop/Backdrop';
 import Aux from '../../../Aux/Aux';
 
 
-const sideDraw = (props) => {
+const sideDraw = props => {
 
 let attachedClasses = [classes.SideDraw, classes.Close];
 

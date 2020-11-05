@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import Aux from '../Aux/Aux';
 import {connect} from 'react-redux'
 import classes from './Layout.css'
@@ -6,36 +6,37 @@ import Toolbar from '../Layout/Navigation/Toolbar/Toolbar';
 import SideDraw from '../Layout/Navigation/SideDraw/SideDraw';
 
 
-class Layout extends Component{
+const layout = props => {
 
-    state= {
-        showSideDraw:true
-    }
-    closeSideDrawHandler = () => {
-        this.setState({showSideDraw:false})
-    }
-
-    sideDrawClickHandler = () => {
-        this.setState((prevSideDrawState) => {
-            return{showSideDraw :!prevSideDrawState.showSideDraw};
-        })
+   const [showSideDraw,setShowSideDraw] = useState(false)
+   
+   const closeSideDrawHandler = () => {
+        setShowSideDraw(false);
     }
 
-    render(){
+    const sideDrawClickHandler = () => {
+       setShowSideDraw(!showSideDraw);
+        // this.setState((prevSideDrawState) => {
+        //     return{showSideDraw :!prevSideDrawState.showSideDraw};
+        // })
+    }
+
+  
         return(
             <Aux>
                 <Toolbar 
-                    sideDrawClicked={this.sideDrawClickHandler}
-                    isAuthenticated={this.props.isAuthenticated}/>
-                <SideDraw closeSideDraw={this.closeSideDrawHandler}
-                     isAuthenticated={this.props.isAuthenticated}
-                     openSideDraw={this.state.showSideDraw}/>
+                    sideDrawClicked={sideDrawClickHandler}
+                    isAuthenticated={props.isAuthenticated}/>
+                <SideDraw 
+                    closeSideDraw={closeSideDrawHandler}
+                    isAuthenticated={props.isAuthenticated}
+                    openSideDraw={showSideDraw}/>
                 <main className={classes.Content}>
-                    {this.props.children}
+                    {props.children}
                     </main>
             </Aux>
         )
-    }
+    
 }
 
 const mapStateToProps = state =>{
@@ -43,4 +44,4 @@ const mapStateToProps = state =>{
         isAuthenticated : state.auth.token !== null
     }
 }
-export default connect(mapStateToProps)(Layout);
+export default connect(mapStateToProps)(layout);

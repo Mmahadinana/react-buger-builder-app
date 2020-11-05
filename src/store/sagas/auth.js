@@ -1,14 +1,15 @@
 import { delay } from 'redux-saga/effects';
-import {put} from 'redux-saga/effects';
+import {put, call} from 'redux-saga/effects';
 import * as actions from '../actions/index'
 import axios from 'axios';
 //generator is next js feature that are functions that running incrementally and can be pouses
 // is used here to handle side effects of async
 //yield - step should execute and we wait until it is done
 export function* logoutSaga(action){
-    yield localStorage.removeItem('token');
-    yield localStorage.removeItem('expiryTime');
-    yield localStorage.removeItem('userId');
+    //call makes the functon to be testable
+    yield call([localStorage,"removeItem"],'token');
+    yield call([localStorage,"removeItem"],'expiryTime');
+    yield call([localStorage,"removeItem"],'userId');
     yield put(actions.logoutSucceeded())
 }
 
